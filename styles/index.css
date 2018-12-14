@@ -83,3 +83,7 @@ label{
 #ratings-to-display {
   width: 60px;
 }
+
+ul{
+  list-style: none;
+}
