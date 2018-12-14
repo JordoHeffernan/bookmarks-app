@@ -75,7 +75,7 @@ label{
   width: 80%
 }
 
-.add-bookmark-modal .desc-entry {
+.add-bookmark-modal .desc {
   height: 110px;
   width: 80%;
 }
@@ -84,7 +84,15 @@ label{
   width: 60px;
 }
 
-ul{
+ul {
   list-style: none;
-  font
-}
+  font-family: inherit;
+  
+};
+
+/* .bookmarks-list .item-div {
+  background-color: white;
+  margin: 30px;
+  padding: 20px;
+  border: solid 2px black;
+} */

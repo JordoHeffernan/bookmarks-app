@@ -17,6 +17,8 @@ const store = (function() {
 
   const findAndUpdate = function(id, newData) {
     const item = this.findById(id);
+    console.log(id)
+    console.log(newData)
     Object.assign(item, newData);
   };
 
@@ -25,9 +27,7 @@ const store = (function() {
   };
 
   const setAddBookmarkModal = function() {
-    console.log('setAddBookmarkModal ran')
     this.addBookmarkModal = !this.addBookmarkModal;
-    console.log(store.addBookmarkModal)
   };
 
   const setDisplayDetail = function (id) {
