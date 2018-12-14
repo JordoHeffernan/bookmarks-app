@@ -23,7 +23,8 @@ header {
 button {
   font-family: inherit;
   background-color: #E5B364;  
-  font-size: 16px
+  font-size: 16px;
+  border-radius: 6px;
 }
 
 .add-bookmark-bttn {
@@ -67,9 +68,11 @@ label{
   margin: auto;
   width: 80%;
   text-align: center;
-  background-color: #f2f2f2;
+  background-color:  #ccdcff;
   padding-top: 10px;
   padding-bottom: 30px;
+  border: black solid 2px;
+  border-radius: 20px;
 }
 
 .add-bookmark-modal button {
@@ -109,10 +112,11 @@ ul {
 }
 
 .bookmarks-list .item-div {
-  background-color: #f2f2f2;
+  background-color:  #ccdcff;
   margin: 30px;
   padding: 20px;
   border: solid 2px black;
+  border-radius: 20px;
 } 
 
 .bookmarks-list .item-div div {
