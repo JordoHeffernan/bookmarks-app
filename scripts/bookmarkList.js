@@ -92,7 +92,7 @@ const bookmarkList = (function() {
     const bookarmarkListItemString = generateBookmarkString(items);
     if (store.ratingsDisplayed > 1)items= items.filter(item => item.rating >= store.ratingsDisplayed);
     if (store.addBookmarkModal) {
-      $('.container').html(addBookmarkModal);
+      $('.js-bookmarks-list').html(addBookmarkModal);
       //$('.js-bookmarks-list').toggleClass('hidden');
     } else {
       $('.js-bookmarks-list').html(bookarmarkListItemString);
