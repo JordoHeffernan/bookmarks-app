@@ -89,22 +89,28 @@ const bookmarkList = (function() {
     console.log('render ran');
     let items = [ ...store.items];
 
+    if (store.ratingsDisplayed > 1) {
+      items = items.filter(item => item.rating >= store.ratingsDisplayed);
+    }    
+
     const bookarmarkListItemString = generateBookmarkString(items);
-    if (store.ratingsDisplayed > 1)items= items.filter(item => item.rating >= store.ratingsDisplayed);
+
     if (store.addBookmarkModal) {
       $('.js-bookmarks-list').html(addBookmarkModal);
       //$('.js-bookmarks-list').toggleClass('hidden');
     } else {
       $('.js-bookmarks-list').html(bookarmarkListItemString);
     }
+    
   }
 
   function handleAddBookmarkClicked () {
     $('#page-controls').on('click', '.js-add-bookmark-bttn', event => {
-      console.log('button was clicked');
+      console.log('addbookmark was clicked');
       event.preventDefault();
       store.setAddBookmarkModal();
       render();
+      
     });
   }
 
@@ -138,10 +144,19 @@ const bookmarkList = (function() {
     });
   }
 
+  function handleRatingChange() {
+    $('#ratings-to-display').on('change', event => {
+      const rating = $(event.target).val();
+      store.updateRatingsDisplayed(rating);
+      render();
+    });
+  }
+
   function bindEventListeners () {
     handleAddBookmarkClicked();
     handleNewBookmarkSubmit();
     handleCancleClicked();
+    handleRatingChange();
   }
     
   return {
