@@ -1,0 +1,85 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: azure;
+  }
+
+header {
+  text-align: center;
+  background-color: rgb(224, 204, 255);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#page-controls {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  vertical-align: middle
+}
+
+button {
+  font-family: inherit;
+  background-color: rgb(224, 204, 255);
+}
+
+.add-bookmark-bttn {
+  display: inline-block;
+  clear: both;
+  margin: 10px;
+  vertical-align: middle;
+}
+
+.ratings-box {
+  display: inline-block;
+}
+
+label{
+  display:block;
+  margin-bottom: 5px;
+  clear: both;
+  font-family: inherit;
+}
+
+#ratings-to-display {
+  display: inline-block;
+  margin: 10px;
+  margin: auto;
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+.add-bookmark-modal {
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  background-color: lightgrey;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+.add-bookmark-modal button {
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.add-bookmark-modal label {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.add-bookmark-modal input {
+  width: 80%
+}
+
+.add-bookmark-modal .desc-entry {
+  height: 110px;
+  width: 80%;
+}
+
+#ratings-to-display {
+  width: 60px;
+}
