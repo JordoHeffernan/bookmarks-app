@@ -1,12 +1,15 @@
 body {
     font-family: 'Lato', sans-serif;
+    background-image: url("https://psap.library.illinois.edu/assets/parchment_detail-1500-06650fb8ace374fe2daf6242ec2c1b63.jpg");
     background-color: azure;
+    
   }
 
 header {
   text-align: center;
-  background-color: rgb(224, 204, 255);
-  padding: 10px;
+  background-color: #E5B364;
+  padding-top: 10px;
+  padding-bottom: 1px;
   margin-bottom: 20px;
 }
 
@@ -19,7 +22,8 @@ header {
 
 button {
   font-family: inherit;
-  background-color: rgb(224, 204, 255);
+  background-color: #E5B364;  
+  font-size: 16px
 }
 
 .add-bookmark-bttn {
@@ -27,17 +31,25 @@ button {
   clear: both;
   margin: 10px;
   vertical-align: middle;
+  height: 35px;
 }
 
 .ratings-box {
   display: inline-block;
+  vertical-align: horizontal;
+}
+
+.ratings-box label{
+  font-size: 20px;
+  text-shadow: 1px 1px #f2f2f2;
 }
 
 label{
   display:block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   clear: both;
   font-family: inherit;
+  font-weight: bold;
 }
 
 #ratings-to-display {
@@ -55,7 +67,7 @@ label{
   margin: auto;
   width: 80%;
   text-align: center;
-  background-color: lightgrey;
+  background-color: #f2f2f2;
   padding-top: 10px;
   padding-bottom: 30px;
 }
@@ -87,16 +99,17 @@ label{
 ul {
   list-style: none;
   font-family: inherit;
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 
-/* li {
-  background-color: black;
-} */
+#edit-desc {
+  height: 110px;
+  width: 80%;
+}
 
 .bookmarks-list .item-div {
-  background-color: white;
+  background-color: #f2f2f2;
   margin: 30px;
   padding: 20px;
   border: solid 2px black;
@@ -110,3 +123,28 @@ ul {
   display: block;
   margin: 10px;
 }
+
+.bookmark-desc{
+  width: 80px;
+  word-wrap: break-word;
+}
+
+.edit-item input {
+  width: 80%;
+}
+
+.bookmark-name {
+  font-size: 20px;
+}
+
+.bold {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.bookmark-controls {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  align-items: center;
+  }

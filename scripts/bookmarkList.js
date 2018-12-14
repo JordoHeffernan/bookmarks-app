@@ -6,10 +6,13 @@ const bookmarkList = (function() {
 
   function generateItemElement(item) {
     
-    let itemTitle = `<span class="bookmark-name">Title: ${item.title}</span>`;
-    let itemRating = `<span class="bookmark-rating">Rating: ${item.rating}</span>`;
-    let itemURL = `<span class="bookmark-url">Visit Site: ${item.url}</span>`;
-    let itemDesc = `<span class="bookmark-desc>Description: ${item.desc}</span>`;
+    let itemTitle = `<span tabindex="0" class="bookmark-name"><span class="bold">Title: </span>${item.title}</span>`;
+    let itemRating = `<span tabindex="0" class="bookmark-rating"><span class="bold">Rating: </span> ${item.rating}</span>`;
+    let itemDesc = `<span tabindex="0" class="bookmark-desc"><span class="bold">Description: </span>${item.desc}</span>`;
+    let itemURL = `<span tabindex="0" class="bookmark-url"><span class="bold">Visit Site: </span><a href="${item.url}" target="_blank">${item.url}</a></span>`;
+    console.log(itemURL)
+    
+    console.log(itemDesc)
     let displayDetail = item.displayDetail;
     
     if (item.isEditing && item.displayDetail) {
@@ -20,7 +23,7 @@ const bookmarkList = (function() {
           <label for="edit-title">Title</label>
           <input name="title" id="edit-title"class="edit-bookmark-name js-edit-bookmar-name" type="text" value="${item.title}" />
           <label for="edit-desc">Description</label>
-          <textarea name="desc" id="edit-desc" class="edit-bookmark-desc js-edit-bookmark-desc">${item.desc}</textarea>
+          <textarea maxlength="420" name="desc" id="edit-desc" class="edit-bookmark-desc js-edit-bookmark-desc">${item.desc}</textarea>
           <label for="edit-rating">Rating</label>
           <select name="rating" id="edit-rating" class="edit-rating js-edit-rating" setDefault="${item.rating}">
             <option value="1">1</option>
@@ -43,18 +46,18 @@ const bookmarkList = (function() {
       </li>`;
     } else if (displayDetail) {
       return `
-        <li class ="js-item-element" data-item-id="${item.id}">
+        <li class="js-item-element" data-item-id="${item.id}">
           <div class="item-div">
             <div class="title-div">
               ${itemTitle}
             </div>
-            <div class ="rating-div">
+            <div class="rating-div">
               ${itemRating}
             </div>
             <div class="desc-div">
               ${itemDesc}
             </div>
-            <div class ="url-div">
+            <div class="url-div">
               ${itemURL}
             </div>
             <div class="bookmark-controls">
@@ -66,6 +69,7 @@ const bookmarkList = (function() {
                 <span class="button-label">Delete</span>
               </button>
             </div>
+          </div>
         </li>`;
     } else {
       return`
@@ -154,7 +158,7 @@ const bookmarkList = (function() {
   function handleDeleteClicked() {
     $('.js-bookmarks-list').on('click', '.js-bookmark-delete', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      api.deleteItem(id, store.findAndDelete(id));
+      api.deleteItem(id, store.findAndDelete(id), (message) => store.error(message));
       render();
     });
   }
@@ -186,7 +190,7 @@ const bookmarkList = (function() {
         store.setItemEditing(id);
         store.setDisplayDetail(id);
         render();
-      });
+      }, (message) => store.error(message));
     });
   }
 
@@ -196,7 +200,6 @@ const bookmarkList = (function() {
       event.preventDefault();
       store.setAddBookmarkModal();
       render();
-      
     });
   }
 
@@ -212,9 +215,10 @@ const bookmarkList = (function() {
       const str = JSON.stringify(obj);
       api.createItem(str, (newItem) => {
         store.addItem(newItem);
+        store.setAddBookmarkModal();
         render();
-      });
-      store.setAddBookmarkModal();
+      }, (message) => store.error(message));
+      
     });
   }
 
