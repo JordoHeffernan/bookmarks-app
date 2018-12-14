@@ -17,6 +17,7 @@ const store = (function() {
 
   const findAndUpdate = function(id, newData) {
     const item = this.findById(id);
+    console.log('findAndUpdate ran')
     console.log(id)
     console.log(newData)
     Object.assign(item, newData);

@@ -8,52 +8,34 @@ const bookmarkList = (function() {
     
     let itemTitle = `<span class="bookmark-name">Title: ${item.title}</span>`;
     let itemRating = `<span class="bookmark-rating">Rating: ${item.rating}</span>`;
-    let itemURL = `<span class="bookmark-url">${item.url}</span>`;
-    let itemdesc = `<span class="bookmark-desc>${item.desc}</span>`;
+    let itemURL = `<span class="bookmark-url">Visit Site: ${item.url}</span>`;
+    let itemDesc = `<span class="bookmark-desc>Description: ${item.desc}</span>`;
     let displayDetail = item.displayDetail;
     
     if (item.isEditing && item.displayDetail) {
-      // itemTitle = `
-      //   <form class="js-edit-name">
-      //       <input class="bookmark-name type="text" value="${item.title}" />
-      //   </from>`;
-      // itemdesc = `
-      //   <form class="js-edit-desc">
-      //     <input class="bookmark-desc> type="text" value="${item.desc}" />
-      //   </form>`;
-      // itemRating = `
-      // <select class="js-edit-rating">
-      //   <option value="1">1</option>
-      //   <option value="2">2</option>
-      //   <option value="3">3</option>
-      //   <option value="4">4</option>
-      //   <option value="5">5</option>
-      // </select>`;
       return `
       <li class ="js-item-element" data-item-id="${item.id}">
       <div class="item-div">
         <form class="edit-item js-edit-item">
           <label for="edit-title">Title</label>
-          <input id="edit-title"class="edit-bookmark-name js-edit-bookmar-name" type="text" value="${item.title}" />
+          <input name="title" id="edit-title"class="edit-bookmark-name js-edit-bookmar-name" type="text" value="${item.title}" />
           <label for="edit-desc">Description</label>
-          <textarea id="edit-desc" class="edit-bookmark-desc js-edit-bookmark-desc">${item.desc}</textarea>
+          <textarea name="desc" id="edit-desc" class="edit-bookmark-desc js-edit-bookmark-desc">${item.desc}</textarea>
           <label for="edit-rating">Rating</label>
-          <select id="edit-rating" class="edit-rating js-edit-rating" val="${item.rating}">
+          <select name="rating" id="edit-rating" class="edit-rating js-edit-rating" setDefault="${item.rating}">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
+          <button type="submit" class="edit-item-submit-button js-edit-item-submit-button">Submit Changes</button>
         </form>
         <div class ="url-div">
           ${itemURL}
         </div>
         <div class="bookmark-controls">
           <button type="submit" class="detail-button js-detail-button">Display Detail</button>
-          <button class="bookmark-edit js-bookmark-edit">
-            <span class="button-label">Edit</span>
-          </button>
           <button class="bookmark-delete js-bookmark-delete">
             <span class="button-label">Delete</span>
           </button>
@@ -62,28 +44,28 @@ const bookmarkList = (function() {
     } else if (displayDetail) {
       return `
         <li class ="js-item-element" data-item-id="${item.id}">
-        <div class="item-div">
-          <div class="title-div">
-            ${itemTitle}
-          </div>
-          <div class ="rating-div">
-            ${itemRating}
-          </div>
-          <div class="desc-div">
-            ${itemdesc}
-          </div>
-          <div class ="url-div">
-            ${itemURL}
-          </div>
-          <div class="bookmark-controls">
-            <button type="submit" class="detail-button js-detail-button">Display Detail</button>
-            <button class="bookmark-edit js-bookmark-edit">
-              <span class="button-label">Edit</span>
-            </button>
-            <button class="bookmark-delete js-bookmark-delete">
-              <span class="button-label">Delete</span>
-            </button>
-          </div>
+          <div class="item-div">
+            <div class="title-div">
+              ${itemTitle}
+            </div>
+            <div class ="rating-div">
+              ${itemRating}
+            </div>
+            <div class="desc-div">
+              ${itemDesc}
+            </div>
+            <div class ="url-div">
+              ${itemURL}
+            </div>
+            <div class="bookmark-controls">
+              <button type="submit" class="detail-button js-detail-button">Display Detail</button>
+              <button class="bookmark-edit js-bookmark-edit">
+                <span class="button-label">Edit</span>
+              </button>
+              <button class="bookmark-delete js-bookmark-delete">
+                <span class="button-label">Delete</span>
+              </button>
+            </div>
         </li>`;
     } else {
       return`
@@ -159,6 +141,11 @@ const bookmarkList = (function() {
   function handleDetailClicked() {
     $('.js-bookmarks-list').on('click', '.js-detail-button', event => {
       const id = getItemIdFromElement(event.currentTarget);
+      const item = store.findById(id);
+      const editingStatus = item.isEditing;
+      if (editingStatus) {
+        store.setItemEditing(id);
+      }
       store.setDisplayDetail(id);
       render();
     });
@@ -175,7 +162,7 @@ const bookmarkList = (function() {
   function handleItemStartEditing() {
     $('.js-bookmarks-list').on('click', '.js-bookmark-edit', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      store.setItemEditing(id, true);
+      store.setItemEditing(id);
       render();
     });
   }
@@ -183,18 +170,21 @@ const bookmarkList = (function() {
   function handleEditBookmarkSubmit() {
     $('.js-bookmarks-list').on('submit', '.js-edit-item', event => {
       event.preventDefault();
+      console.log(event.currentTarget)
       const id = getItemIdFromElement(event.currentTarget);
-      console.log(id)
-      const formData = FormData(event.currentTarget);
-      console.log(formData)
-      const obj = {};
+      console.log(id);
+      const formData = new FormData(event.currentTarget);
+      console.log(formData);
+      const newData = {};
       formData.forEach((val, key) => {
-        obj[key] = val;});
-      console.log(obj);
-      const str = JSON.stringify(obj);
-      console.log(str);
-      api.updateItem(id, str, (obj) => {
-        store.findAndUpdate(id, obj);
+        newData[key] = val;});
+      console.log(newData);
+      //const dataStr = JSON.stringify(newData);
+      //console.log(dataStr);
+      api.updateItem(id, newData, () => {
+        store.findAndUpdate(id, newData);
+        store.setItemEditing(id);
+        store.setDisplayDetail(id);
         render();
       });
     });

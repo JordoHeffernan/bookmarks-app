@@ -87,12 +87,26 @@ label{
 ul {
   list-style: none;
   font-family: inherit;
-  
-};
+  width: 60%;
+  margin: auto;
+}
 
-/* .bookmarks-list .item-div {
+/* li {
+  background-color: black;
+} */
+
+.bookmarks-list .item-div {
   background-color: white;
   margin: 30px;
   padding: 20px;
   border: solid 2px black;
-} */
+} 
+
+.bookmarks-list .item-div div {
+  margin: 10px;
+}
+
+.edit-item-submit-button {
+  display: block;
+  margin: 10px;
+}
