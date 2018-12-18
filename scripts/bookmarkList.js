@@ -25,7 +25,7 @@ const bookmarkList = (function() {
           <label for="edit-desc">Description</label>
           <textarea maxlength="420" name="desc" id="edit-desc" class="edit-bookmark-desc js-edit-bookmark-desc">${item.desc}</textarea>
           <label for="edit-rating">Rating</label>
-          <select name="rating" id="edit-rating" class="edit-rating js-edit-rating" option-selected="${item.rating}">
+          <select name="rating" id="edit-rating" class="edit-rating js-edit-rating">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -34,6 +34,7 @@ const bookmarkList = (function() {
           </select>
           <label for="edit-url">URL</label>
           <input name="url" id="url-title"class="edit-url-name js-edit-bookmark-url" type="url" value="${item.url}" required pattern="https?://.+[.].+" />
+          <p>required format: http(s)://(<strong>your url</strong>).com/gov/org etc.</p>
           <button type="submit" class="edit-item-submit-button js-edit-item-submit-button">Submit Changes</button>
         </form>
       </li>`;

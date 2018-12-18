@@ -153,6 +153,6 @@ ul {
   align-items: center;
   }
 
-  .add-bookmark-modal p {
+  .add-bookmark-modal p, .edit-item p {
     color: red;
   }
