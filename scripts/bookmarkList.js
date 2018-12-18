@@ -25,24 +25,17 @@ const bookmarkList = (function() {
           <label for="edit-desc">Description</label>
           <textarea maxlength="420" name="desc" id="edit-desc" class="edit-bookmark-desc js-edit-bookmark-desc">${item.desc}</textarea>
           <label for="edit-rating">Rating</label>
-          <select name="rating" id="edit-rating" class="edit-rating js-edit-rating" setDefault="${item.rating}">
+          <select name="rating" id="edit-rating" class="edit-rating js-edit-rating" option-selected="${item.rating}">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
+          <label for="edit-url">URL</label>
+          <input name="url" id="url-title"class="edit-url-name js-edit-bookmark-url" type="url" value="${item.url}" required pattern="https?://.+[.].+" />
           <button type="submit" class="edit-item-submit-button js-edit-item-submit-button">Submit Changes</button>
         </form>
-        <div class ="url-div">
-          ${itemURL}
-        </div>
-        <div class="bookmark-controls">
-          <button type="submit" class="detail-button js-detail-button">Display Detail</button>
-          <button class="bookmark-delete js-bookmark-delete">
-            <span class="button-label">Delete</span>
-          </button>
-        </div>
       </li>`;
     } else if (displayDetail) {
       return `
@@ -100,7 +93,8 @@ const bookmarkList = (function() {
       <label for="title">Title</label>
       <input type="text" name="title" class="js-title-entry" placeholder="Google">
       <label for="url">Webpage Address</label>
-      <input type="text" name="url" class="js-url-entry" value="https://">
+      <p>required format: http(s)://(<strong>your url</strong>).com/gov/org etc.</p>
+      <input type="url" name="url" class="js-url-entry" value="http://" required pattern="https?://.+[.].+">
       <label for="desc">Description</label>
       <textarea name="desc" class="desc js-desc-entry" maxlength="420" placeholder="A powerful search engine"></textarea>
       <label for="rating">Rating</label>

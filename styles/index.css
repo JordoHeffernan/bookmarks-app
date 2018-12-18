@@ -47,7 +47,7 @@ button {
 
 label{
   display:block;
-  margin-bottom: 10px;
+  margin-top: 10px;
   clear: both;
   font-family: inherit;
   font-weight: bold;
@@ -151,4 +151,8 @@ ul {
   justify-content: space-evenly;
   width: 80%;
   align-items: center;
+  }
+
+  .add-bookmark-modal p {
+    color: red;
   }
